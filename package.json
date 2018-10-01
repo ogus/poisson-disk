@@ -1,0 +1,17 @@
+{
+  "name": "poisson-disk",
+  "version": "1.0.0",
+  "description": "Generation of 2D points using the Poisson Disk sampling algorithm",
+  "scripts": {
+    "build": "terser src/poisson-disk.js -c -m reserved=['PoissonDisk']> src/poisson-disk.min.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ogus/poisson-disk.git"
+  },
+  "author": "Ogus",
+  "license": "ISC",
+  "devDependencies": {
+    "terser": "^3.9.2"
+  }
+}
