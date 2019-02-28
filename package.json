@@ -1,17 +1,28 @@
 {
   "name": "poisson-disk",
-  "version": "1.0.0",
-  "description": "Generation of 2D points using the Poisson Disk sampling algorithm",
+  "version": "1.1.0",
+  "description": "A fast Poisson Disk sampling algorithm for random 2D points generation",
+  "author": "Ogus",
+  "license": "WTFPL",
+  "main": "src/poisson-disk.js",
   "scripts": {
     "build": "terser src/poisson-disk.js -c -m reserved=['PoissonDisk']> src/poisson-disk.min.js"
   },
+  "devDependencies": {
+    "terser": "^3.9.2"
+  },
+  "keywords": [
+    "poisson-disk",
+    "poisson",
+    "sampling",
+    "random",
+    "points",
+    "coordinates",
+    "2D"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/ogus/poisson-disk.git"
   },
-  "author": "Ogus",
-  "license": "ISC",
-  "devDependencies": {
-    "terser": "^3.9.2"
-  }
+  "homepage": "https://github.com/ogus/poisson-disk#readme"
 }
