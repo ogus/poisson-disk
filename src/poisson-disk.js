@@ -32,7 +32,7 @@
     yMin = parse(viewport[2], 0);
     yMax = parse(viewport[3], 0);
     radius = Math.max(parse(minDistance, 1), 1);
-    k = parse(maxTries, 30) | 0;
+    k = Math.max(parse(maxTries, 30), 2);
     random = typeof(rng) === 'function' ? rng : Math.random;
     grid.cellSize = radius * Math.SQRT1_2;
     grid.width = Math.ceil((xMax - xMin) / grid.cellSize);
@@ -43,13 +43,9 @@
   function initializeState() {
     pointQueue = new Array(0);
     firstPoint = true;
-    for (let i = 0; i < grid.data.length; i++) {
+    for (var i = 0; i < grid.data.length; i++) {
       grid.data[i] = null;
     }
-  }
-
-  function newPoint(x, y) {
-    return {x: x, y: y};
   }
 
   function dist2(x1, y1, x2, y2) {
@@ -57,8 +53,8 @@
   }
 
   function createNewPoint(x, y) {
-    let point = newPoint(x, y);
-    let index = Math.floor(x / grid.cellSize) + Math.floor(y / grid.cellSize) * grid.width;
+    var point = {x: x, y: y};
+    var index = Math.floor(x / grid.cellSize) + Math.floor(y / grid.cellSize) * grid.width;
     grid.data[index] = point;
     pointQueue.push(point);
     return point;
@@ -68,9 +64,9 @@
     if (x < xMin || x > xMax || y < yMin || y > yMax) {
       return false;
     }
-    let col = Math.floor((x-xMin) / grid.cellSize);
-    let row = Math.floor((y-yMin) / grid.cellSize);
-    let idx = 0, i = 0, j = 0;
+    var col = Math.floor((x-xMin) / grid.cellSize);
+    var row = Math.floor((y-yMin) / grid.cellSize);
+    var idx = 0, i = 0, j = 0;
     for (i = col-2; i <= col+2; i++) {
       for (j = row-2; j <= row+2; j++) {
         if (i >= 0 && i < grid.width && j >= 0 && j < grid.height) {
@@ -86,18 +82,18 @@
   }
 
   function nextPoint() {
-    let x = 0
-    let y = 0;
+    var x = 0
+    var y = 0;
     if (firstPoint) {
       firstPoint = false;
       x = xMin + (xMax - xMin) * random();
       y = yMin + (yMax - yMin) * random();
       return createNewPoint(x, y);
     }
-    let idx = 0, distance = 0, angle = 0
+    var idx = 0, distance = 0, angle = 0
     while (pointQueue.length > 0) {
       idx = (pointQueue.length * random()) | 0;
-      for (let i = 0; i < k; i++) {
+      for (var i = 0; i < k; i++) {
         distance = radius * (random() + 1);
         angle = 2*Math.PI * random();
         x = pointQueue[idx].x + distance*Math.cos(angle);
@@ -112,8 +108,8 @@
   }
 
   function allPoints() {
-    let point = null;
-    let result = new Array(0);
+    var point = null;
+    var result = new Array(0);
     while (true) {
       point = nextPoint();
       if (point == null) {
