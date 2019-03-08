@@ -2,10 +2,19 @@
 
 A fast Poisson Disk sampling algorithm for random 2D points generation.
 
-The Poisson Disk sampling algorithm is used to create random points, where each point is separated from other points by a specified minimum distance. This result in a tighlty-packed and homogeneous set of points.
+## Introduction
+
+The Poisson Disk sampling algorithm is used to create random points coordinates, so that each point is separated from all other points by a specified minimum distance. This result in a tighlty-packed and homogeneous set of points.
 
 The implementation is based on [this paper](https://www.cs.ubc.ca/~rbridson/docs/bridson-siggraph07-poissondisk.pdf) by Robert Bridson, and run in *O(n)* time.
 
+## Example
+
+A sample of points generated in the full extent of a Canvas:
+
+![Points generated with the Poisson Disk algorithm](example/sample.png)
+
+Each points is represented by a blue circle, and the minimum distance is visible in gray.
 
 ## Usage
 
@@ -30,9 +39,9 @@ while (true) {
   if (Sampling.done()) {
     break;
   }
-  eachPoints.push(point);
   console.log(point);
   // output: {x: 54, y: 35}
+  eachPoints.push(point);
 }
 console.log(eachPoints);
 // output: [{x: 54, y: 35}, {x: 46, y: 62}, ...]
@@ -42,8 +51,6 @@ The Web demonstration in the `example` folder can be opened with [raw.githack](h
 
 
 ## API
-
-The module contains a single `PoissonDisk` class.
 
 ### Constructor
 
@@ -66,21 +73,25 @@ The creator accepts 4 arguments:
 Returns the `{x, y}` coordinates of a new random point in the viewport.
 This point will be distant from all previously generated points by at least `minimumDistance`.
 
-Returns `null` if there is not enough free space for a new point.
+Returns `null` if it is not possible to create a new point that respect the minimum distance condition.
+
+*Note:* The algorithm can not predict in advance if there is enough free space to create a new point. Therefore, make sure to test for `null` value when the methods is used in a loop.
 
 #### `PoissonDisk.all()`
 
-Returns an Array with the `{x, y}` coordinates of all random points created.
+Returns an `Array` with the `{x, y}` coordinates of all random points created.
 
 ### Utility Methods
 
 #### `PoissonDisk.reset()`
 
-Reset the internal state of the PoissonDisk sample, by removing all informations on previously generated points. This internal reset is automatically executed when then `all()` method is called.
+Reset the internal state of the PoissonDisk sample, by removing all informations on previously generated points.
+
+This internal reset is automatically executed when then `all()` method is called.
 
 #### `PoissonDisk.done()`
 
-Returns a `boolean` that indicates if the sampling is finished.
+Returns a `Boolean` that indicates if the sampling is finished, meaning that all values from the `next()` methods will be null
 
 ### Data format
 
@@ -96,6 +107,23 @@ npm install poisson-disk
 ```
 
 It can also be installed by cloning the repository & including the `poisson-disk.js` file in your project.
+
+## Installation
+
+You can install the module with [npm](https://www.npmjs.com/)
+```sh
+npm install poisson-disk
+```
+
+You can import the module with a CDN like [unpkg](https://unpkg.com/)
+```html
+<script type="text/javascript" src="https://unpkg.com/poisson-disk@latest"></script>
+```
+
+You can clone the repository & include the `poisson-disk.js` file in your project:
+```sh
+git clone https://github.com/ogus/poisson-disk.git
+```
 
 
 ## License
