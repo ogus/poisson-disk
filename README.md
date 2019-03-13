@@ -100,16 +100,6 @@ The points are `Object` with the following format: `{x: number, y: number}`.
 
 ## Installation
 
-The module can be installed from `npm`
-
-```sh
-npm install poisson-disk
-```
-
-It can also be installed by cloning the repository & including the `poisson-disk.js` file in your project.
-
-## Installation
-
 You can install the module with [npm](https://www.npmjs.com/)
 ```sh
 npm install poisson-disk
